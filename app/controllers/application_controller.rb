@@ -5,6 +5,9 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound do
     render json: { error: "Not found" }, status: :not_found
   end
+  rescue_from ActiveRecord::RecordNotUnique do
+    render json: { error: "Membership already active" }, status: :unprocessable_content
+  end
 
   def request_authentication
     render json: { error: "Unauthorized" }, status: :unauthorized

@@ -11,14 +11,12 @@ class MembershipsController < ApplicationController
     else
       render json: { errors: @membership.errors.full_messages }, status: :unprocessable_content
     end
-
-    render json: membership.slice(:id, :team_id, :user_id, :role), status: :created
   end
 
   def destroy
     @membership = current_user.viewable_memberships.find(params[:id])
 
-    if membership.destroy
+    if @membership.destroy
       head :no_content
     else
       render json: { errors: @membership.errors.full_messages }, status: :unprocessable_content
