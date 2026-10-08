@@ -8,7 +8,9 @@ class User < ApplicationRecord
   has_many :authored_notes, class_name: "Note", dependent: :destroy, foreign_key: :author_id
 
   has_many :viewable_notes, class_name: "Note", through: :teams, source: :notes
+  has_many :viewable_memberships, class_name: "Membership", through: :teams, source: :memberships
 
-  validates :email, presence: true, uniqueness: {case_sensitive: false }
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 8 }
 end
