@@ -1,5 +1,4 @@
 class AccountController < ApplicationController
-  before_action :authenticate!
   before_action :valid_password?, only: :update
 
   def show

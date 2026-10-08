@@ -1,6 +1,4 @@
 class MembershipsController < ApplicationController
-  before_action :authenticate!
-
   def create
     # Could require the current user to be either owner or have invite permissions
     team = current_user.teams.find(params[:team_id])

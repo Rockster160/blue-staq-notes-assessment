@@ -1,5 +1,4 @@
 class NoteController < ApplicationController
-  before_action :authenticate!
   before_action :set_team, only: [:index, :create]
   before_action :set_note, only: [:show, :update]
 

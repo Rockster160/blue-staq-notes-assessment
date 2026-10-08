@@ -1,6 +1,4 @@
 class TeamController < ApplicationController
-  before_action :authenticate!
-
   def index
     render json: current_user.teams.select(:id, :name)
   end

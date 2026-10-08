@@ -5,14 +5,11 @@ class ApplicationController < ActionController::API
     render json: { error: "Not found" }, status: :not_found
   end
 
+  def request_authentication
+    render json: { error: "Unauthorized" }, status: :unauthorized
+  end
+
   private
 
-  def current_user
-    raise "TODO: Authentication!"
-    # @current_user ||= User.authenticate... # TODO: Authorization
-  end
-
-  def authenticate!
-    render(json: { error: "Unauthorized" }, status: :unauthorized) unless current_user
-  end
+  def current_user = (@current_user ||= Current.user)
 end
