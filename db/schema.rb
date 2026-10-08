@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_08_201448) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_08_212633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -35,6 +35,15 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_08_201448) do
     t.index ["team_id"], name: "index_notes_on_team_id"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.bigint "owner_id", null: false
     t.text "name"
@@ -55,5 +64,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_08_201448) do
 
   add_foreign_key "notes", "teams"
   add_foreign_key "notes", "users", column: "author_id"
+  add_foreign_key "sessions", "users"
   add_foreign_key "teams", "users", column: "owner_id"
 end
