@@ -4,7 +4,8 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = current_user.teams.new(team_params)
+    @team = current_user.owned_teams.new(team_params)
+    @team.memberships.build(user: current_user)
 
     if @team.save
       render json: @team.slice(:id, :name), status: :created
@@ -14,9 +15,9 @@ class TeamsController < ApplicationController
   end
 
   def update
-    @team = current_user.teams.find(params[:team_id])
+    @team = current_user.teams.find(params[:id])
 
-    if @team.save
+    if @team.update(team_params)
       render json: @team.slice(:id, :name), status: :ok
     else
       render json: { errors: @team.errors.full_messages }, status: :unprocessable_entity
