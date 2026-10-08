@@ -1,4 +1,4 @@
-class NoteController < ApplicationController
+class NotesController < ApplicationController
   before_action :set_team, only: [:index, :create]
   before_action :set_note, only: [:show, :update]
 

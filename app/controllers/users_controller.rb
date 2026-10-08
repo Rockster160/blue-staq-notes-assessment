@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   def create
     # Just leaving this open for now- anybody can create.
     # We'd scope to the org or require a user get created by an admin if this wasn't internal.

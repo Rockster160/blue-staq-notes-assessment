@@ -1,4 +1,4 @@
-class TeamController < ApplicationController
+class TeamsController < ApplicationController
   def index
     render json: current_user.teams.select(:id, :name)
   end
