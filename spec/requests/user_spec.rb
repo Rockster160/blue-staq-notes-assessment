@@ -31,7 +31,7 @@ RSpec.describe "Users", type: :request do
       }.not_to change(User, :count)
 
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(json[:errors]).to be_present
     end
 
@@ -43,7 +43,7 @@ RSpec.describe "Users", type: :request do
         post "/users", params: params, as: :json
       }.not_to change(User, :count)
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     it "rejects a duplicate username" do
@@ -51,14 +51,14 @@ RSpec.describe "Users", type: :request do
       params = { user: FactoryBot.attributes_for(:user, username: "taken", email: "fresh@example.com") }
 
       post "/users", params: params, as: :json
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     it "rejects a missing username" do
       params = { user: FactoryBot.attributes_for(:user).except(:username) }
 
       post "/users", params: params, as: :json
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
   end
 end

@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
     if @team.save
       render json: @team.slice(:id, :name), status: :created
     else
-      render json: { errors: @team.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @team.errors.full_messages }, status: :unprocessable_content
     end
   end
 
@@ -20,7 +20,7 @@ class TeamsController < ApplicationController
     if @team.update(team_params)
       render json: @team.slice(:id, :name), status: :ok
     else
-      render json: { errors: @team.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @team.errors.full_messages }, status: :unprocessable_content
     end
   end
 

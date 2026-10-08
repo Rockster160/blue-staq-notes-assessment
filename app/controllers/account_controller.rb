@@ -9,7 +9,7 @@ class AccountController < ApplicationController
     if current_user.update(account_params)
       render json: current_user.slice(:id, :email, :username)
     else
-      render json: { errors: current_user.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: current_user.errors.full_messages }, status: :unprocessable_content
     end
   end
 
@@ -23,6 +23,6 @@ class AccountController < ApplicationController
     return unless params.dig(:user).key?(:password)
     return if current_user.authenticate(params[:user][:current_password])
 
-    render json: { errors: ["Current password is incorrect"] }, status: :unprocessable_entity
+    render json: { errors: ["Current password is incorrect"] }, status: :unprocessable_content
   end
 end

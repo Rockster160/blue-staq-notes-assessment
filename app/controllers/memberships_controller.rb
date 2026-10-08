@@ -9,7 +9,7 @@ class MembershipsController < ApplicationController
     if @membership.save
       render json: @membership, status: :created
     else
-      render json: { errors: @membership.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @membership.errors.full_messages }, status: :unprocessable_content
     end
 
     render json: membership.slice(:id, :team_id, :user_id, :role), status: :created
@@ -21,7 +21,7 @@ class MembershipsController < ApplicationController
     if membership.destroy
       head :no_content
     else
-      render json: { errors: @membership.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @membership.errors.full_messages }, status: :unprocessable_content
     end
   end
 end
